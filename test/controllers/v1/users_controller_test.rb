@@ -28,5 +28,32 @@ module V1
       get v1_users_path, headers: jwt_headers(@token)
       assert_response :forbidden
     end
+
+    test 'update user' do
+      admin_credentials
+      user = users(:user_one)
+      params = { email: 'update@example.com', name: 'new name',
+                 active: true, role: :role_two }
+
+      put v1_user_path(user), headers: jwt_headers(@token),
+                              params: params
+      assert_response :ok
+      response_data = JSON.parse(@response.body)['data']
+
+      assert_equal response_data['name'], 'new name'
+      assert_equal response_data['email'], 'update@example.com'
+      assert_equal response_data['role'], 'role_two'
+      assert_equal response_data['active'], true
+    end
+
+    test 'not found user update' do
+      admin_credentials
+      params = { email: 'update@example.com', name: 'new name',
+                 active: true, role: :role_two }
+
+      put v1_user_path(id: 1234), headers: jwt_headers(@token),
+                                  params: params
+      assert_response :not_found
+    end
   end
 end

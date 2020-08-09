@@ -2,8 +2,6 @@ module V1
   class ProfilesController < ApplicationController
     before_action :authenticate_user!
 
-    def show
-      render :show, status: :ok
-    end
+    def show; end
   end
 end

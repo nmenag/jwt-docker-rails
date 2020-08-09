@@ -34,6 +34,11 @@ class ApplicationController < ActionController::API
            status: :unauthorized
   end
 
+  def not_found_response
+    render json: { error: 'not found' },
+           status: :not_found
+  end
+
   def payload
     auth_header = request.headers['Authorization']
     token = auth_header.split(' ').last
