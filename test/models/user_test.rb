@@ -24,8 +24,13 @@ class UserTest < ActiveSupport::TestCase
     refute @user_one.valid?
   end
 
-  test 'invalid without auth_token' do
-    @user_one.auth_token = nil
+  test 'invalid with email format' do
+    @user_one.email = 'wrongemail'
     refute @user_one.valid?
+  end
+
+  test 'valid  email format' do
+    @user_one.email = 'example@example.com'
+    assert @user_one.valid?
   end
 end

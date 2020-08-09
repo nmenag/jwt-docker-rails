@@ -5,6 +5,7 @@ module V1
       @user = User.find_by_email(email)
 
       if @user&.authenticate(password)
+        @user.update_auth_token
         render :create, status: :created
       else
         render json: { error: 'invalid' }, status: :unauthorized
