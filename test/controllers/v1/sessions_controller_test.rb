@@ -2,12 +2,11 @@ require 'test_helper'
 
 module V1
   class SessionsControllerTest < ActionDispatch::IntegrationTest
-
     setup do
       @user = users(:user_one)
     end
 
-    test "create" do
+    test 'create' do
       post v1_sessions_path, headers: password_auth_headers
       assert_response :created
 
@@ -18,11 +17,10 @@ module V1
       assert response_data['token'].present?
     end
 
-    test "create unauthorized" do
+    test 'create unauthorized' do
       post v1_sessions_path, headers: invalid_password_auth_headers
       assert_response :unauthorized
     end
-
 
     private
 
