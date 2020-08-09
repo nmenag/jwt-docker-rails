@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  auth_token      :string           not null
+#  email           :string           not null
+#  password_digest :string           not null
+#  active          :boolean          default(FALSE)
+#  name            :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+user_one:
+  auth_token: <%= SecureRandom.base64 %>
+  email: user.one@example.com
+  password_digest: <%= BCrypt::Password.create('pasword1') %>
+  active: true
+  name: User one
+
+user_two:
+  auth_token: <%= SecureRandom.base64 %>
+  email: user.two@example.com
+  password_digest: <%= BCrypt::Password.create('pasword2') %>
+  active: true
+  name: User Two
