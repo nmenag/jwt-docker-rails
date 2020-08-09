@@ -23,6 +23,7 @@ user_one:
   password_digest: <%= BCrypt::Password.create('password1') %>
   active: true
   name: User one
+  role: 0
 
 user_two:
   auth_token: <%= SecureRandom.base64 %>
@@ -30,6 +31,7 @@ user_two:
   password_digest: <%= BCrypt::Password.create('password2') %>
   active: true
   name: User Two
+  role: 1
 
 admin:
   auth_token: <%= SecureRandom.base64 %>
@@ -37,3 +39,4 @@ admin:
   password_digest: <%= BCrypt::Password.create('Password123') %>
   active: true
   name: Admin user_one
+  role: 2
