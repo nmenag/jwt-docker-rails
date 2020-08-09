@@ -12,8 +12,10 @@
 #  updated_at      :datetime         not null
 #
 class User < ApplicationRecord
+  include Authenticable
+
   has_secure_password
 
   validates :email, :auth_token, presence: true, uniqueness: true
-
+  validates_format_of :email, with: /\A[^@\s]+@[^@\s]+\z/
 end

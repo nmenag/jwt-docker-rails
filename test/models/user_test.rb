@@ -15,7 +15,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
 
-  def setup
+  setup do
     @user_one = users(:user_one)
   end
 
