@@ -19,13 +19,13 @@
 user_one:
   auth_token: <%= SecureRandom.base64 %>
   email: user.one@example.com
-  password_digest: <%= BCrypt::Password.create('pasword1') %>
+  password_digest: <%= BCrypt::Password.create('password1') %>
   active: true
   name: User one
 
 user_two:
   auth_token: <%= SecureRandom.base64 %>
   email: user.two@example.com
-  password_digest: <%= BCrypt::Password.create('pasword2') %>
+  password_digest: <%= BCrypt::Password.create('password2') %>
   active: true
   name: User Two
