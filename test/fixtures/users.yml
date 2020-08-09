@@ -29,3 +29,10 @@ user_two:
   password_digest: <%= BCrypt::Password.create('password2') %>
   active: true
   name: User Two
+
+admin:
+  auth_token: <%= SecureRandom.base64 %>
+  email: admin@example.com
+  password_digest: <%= BCrypt::Password.create('Password123') %>
+  active: true
+  name: Admin user_one

@@ -24,7 +24,7 @@ class User < ApplicationRecord
     WebToken.encode({ token: self.auth_token })
   end
 
-  def update_auth_token
+  def update_auth_token!
     assign_auth_token
     save!
   end
