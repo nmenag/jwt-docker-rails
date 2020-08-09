@@ -10,6 +10,7 @@
 #  name            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  role            :integer          default(0), not null
 #
 class User < ApplicationRecord
   has_secure_password
@@ -19,6 +20,7 @@ class User < ApplicationRecord
 
   before_validation :assign_auth_token
 
+  enum role: %i[role_one role_two admin]
 
   def web_token
     WebToken.encode({ token: self.auth_token })

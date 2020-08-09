@@ -10,6 +10,7 @@
 #  name            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  role            :integer          default(0), not null
 #
 require 'test_helper'
 
@@ -31,5 +32,10 @@ class UserTest < ActiveSupport::TestCase
   test 'valid  email format' do
     @user_one.email = 'example@example.com'
     assert @user_one.valid?
+  end
+
+  test 'role enums' do
+    roles = %w[role_one role_two admin]
+    assert_equal User.roles.keys, roles
   end
 end

@@ -15,6 +15,8 @@ module WebToken
 
     def decode(token)
       JWT.decode(token, SECRET_KEY, true, options={algoritm: 'HS256'})
+    rescue StandardError
+      :invalid_credentials
     end
   end
 end
