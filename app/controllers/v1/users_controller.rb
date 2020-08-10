@@ -13,6 +13,8 @@ module V1
     end
 
     def destroy
+      @user.destroy!
+      render json: { message: 'user was deleted' }, status: :accepted
     end
 
     private

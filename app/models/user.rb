@@ -31,6 +31,10 @@ class User < ApplicationRecord
     save!
   end
 
+  def inactive?
+    !active?
+  end
+
   private
 
   def assign_auth_token

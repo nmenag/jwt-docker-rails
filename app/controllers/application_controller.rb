@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate_user!
-    authorized_response unless current_user.present?
+    authorized_response if current_user.blank?
   end
 
   def authorize!

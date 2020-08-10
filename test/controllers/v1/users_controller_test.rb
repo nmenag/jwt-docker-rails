@@ -12,7 +12,7 @@ module V1
       response_data = JSON.parse(@response.body)['data']
 
       assert_equal response_data.size, 2
-      assert_equal response_data.first.keys, %w[id name email]
+      assert_equal response_data.first.keys, %w[id name email role active]
     end
 
     test 'invalid index' do
@@ -53,6 +53,19 @@ module V1
 
       put v1_user_path(id: 1234), headers: jwt_headers(@token),
                                   params: params
+      assert_response :not_found
+    end
+
+    test 'delete user' do
+      admin_credentials
+      user = users(:user_one)
+      delete v1_user_path(user), headers: jwt_headers(@token)
+      assert_response :accepted
+    end
+
+    test 'not found delete user' do
+      admin_credentials
+      delete v1_user_path(12345), headers: jwt_headers(@token)
       assert_response :not_found
     end
   end
