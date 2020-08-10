@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validates_format_of :email, with: /\A[^@\s]+@[^@\s]+\z/
 
   before_validation :assign_auth_token
+  before_validation :assign_password
 
   enum role: %i[role_one role_two admin]
 
@@ -36,6 +37,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def assign_password
+    self.password = SecureRandom.hex(8)
+  end
 
   def assign_auth_token
     if self.auth_token.blank?

@@ -29,6 +29,22 @@ module V1
       assert_response :forbidden
     end
 
+    test 'create user' do
+      admin_credentials
+      params = { email: 'new.user@example.com', name: 'new user',
+                 active: true, role: :role_one }
+
+      post v1_users_path, headers: jwt_headers(@token),
+                          params: params
+      assert_response :created
+      response_data = JSON.parse(@response.body)['data']
+
+      assert_equal response_data['name'], 'new user'
+      assert_equal response_data['email'], 'new.user@example.com'
+      assert_equal response_data['role'], 'role_one'
+      assert_equal response_data['active'], true
+    end
+
     test 'update user' do
       admin_credentials
       user = users(:user_one)
@@ -37,7 +53,7 @@ module V1
 
       put v1_user_path(user), headers: jwt_headers(@token),
                               params: params
-      assert_response :ok
+      assert_response :accepted
       response_data = JSON.parse(@response.body)['data']
 
       assert_equal response_data['name'], 'new name'
@@ -54,6 +70,17 @@ module V1
       put v1_user_path(id: 1234), headers: jwt_headers(@token),
                                   params: params
       assert_response :not_found
+    end
+
+    test 'invalid update user' do
+      admin_credentials
+      user = users(:user_one)
+      params = { email: 'update',
+                 active: true, role: :role_two }
+
+      put v1_user_path(user), headers: jwt_headers(@token),
+                              params: params
+      assert_response :unprocessable_entity
     end
 
     test 'delete user' do
