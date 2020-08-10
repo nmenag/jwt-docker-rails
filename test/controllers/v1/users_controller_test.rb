@@ -86,7 +86,11 @@ module V1
     test 'delete user' do
       admin_credentials
       user = users(:user_one)
-      delete v1_user_path(user), headers: jwt_headers(@token)
+
+      assert_difference('User.count', -1) do
+        delete v1_user_path(user), headers: jwt_headers(@token)
+      end
+
       assert_response :accepted
     end
 
