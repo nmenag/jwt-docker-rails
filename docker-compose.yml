@@ -1,0 +1,30 @@
+#docker-compose.yml
+version: '3'
+
+volumes:
+  bundle:
+
+services:
+  db:
+    image: postgres:10.6
+    volumes:
+      - /var/lib/postgresql/data
+    ports:
+      - '5434:5432'
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: /bin/bash -lc "/opt/dev_startup.sh"
+    environment:
+        RAILS_ENV: development
+    volumes:
+      - .:/app
+      - bundle:/box
+    ports:
+      - "3001:3000"
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
