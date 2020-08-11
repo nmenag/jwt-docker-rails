@@ -15,4 +15,4 @@ echo 'load seed data'
 bundle exec rake db:seed
 
 echo 'Start rails'
-exec bundle exec rails server
+bundle exec rails s -p 3000 -b '0.0.0.0'
