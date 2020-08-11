@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create(name: 'Admin', email: 'admin@example.com', role: :admin, password: 'pass1234', active: true)
-User.create(name: 'user 1', email: 'admin@example.com', role: :role_one, password: 'pass1234', active: true)
-User.create(name: 'user 2', email: 'admin@example.com', role: :role_two, password: 'pass1234', active: true)
+User.create(name: 'user 1', email: 'user1@example.com', role: :role_one, password: 'pass1234', active: true)
+User.create(name: 'user 2', email: 'user2@example.com', role: :role_two, password: 'pass1234', active: true)

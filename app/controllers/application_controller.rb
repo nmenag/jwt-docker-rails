@@ -41,7 +41,7 @@ class ApplicationController < ActionController::API
 
   def payload
     auth_header = request.headers['Authorization']
-    token = auth_header.split(' ').last
+    token = auth_header&.split(' ')&.last
     WebToken.decode(token)
   end
 end
