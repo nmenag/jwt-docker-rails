@@ -19,7 +19,7 @@ class User < ApplicationRecord
   validates_format_of :email, with: /\A[^@\s]+@[^@\s]+\z/
 
   before_validation :assign_auth_token
-  before_validation :assign_password
+  before_validation :assign_password, if: :new_record?
 
   enum role: %i[role_one role_two admin]
 
