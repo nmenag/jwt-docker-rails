@@ -17,8 +17,6 @@
 
 **How to run the test suite**
 
-- docker-compose up
-
 `docker-compose exec web rails test`
 
 ## Try it
